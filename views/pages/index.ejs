@@ -1,0 +1,31 @@
+<%-include('../partials/head.ejs') %>
+<body>
+    <%-include('../partials/menu.ejs') %>
+    
+
+    <div class="mt-4 p-5 bg-warning text-white rounded">
+        <h1><%=title %></h1>
+    </div>
+
+    <div class="d-flex flex-column flex-sm-column flex-md-row flex-lg row">
+
+    
+    <% data.forEach((meeting) => { %> 
+    <p class="note"><img src="images/remind.png">
+        <% if (meeting.mandatory) { %> <%console.log(meeting.mandatory) %>
+        <span class="takenote">Attendance Mandatory!</span>
+        <br />
+        <% } %> <%= meeting.topic %>, <br /> <%= meeting.location %>, <br /> <%= meeting.dateTime %> 
+        <br />
+        <!-- Button trigger modal -->
+        <% let meetingAsStr=JSON.stringify(meeting); %>
+        <button type="button" class="parking btn btn-warning" data-bs-toggle="modal" data-bs-target="#parkingModal" id = "<%=meeting.id %>" data-meeting = "<%= meetingAsStr %>">
+            Parking
+        </button>
+    </p>
+    <% });%>
+    <%-include('../partials/footer.ejs') %>
+    </div>
+<%- include('../partials/parkingmodal.ejs') %>
+</body>
+</html>
